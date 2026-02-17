@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
 
-        <title>FlixTube: History</title>
+        <title>FlixTube: Advertise</title>
 
         <link rel="stylesheet" href="css/tailwind.min.css">
         <link rel="stylesheet" href="css/app.css">
@@ -21,34 +21,29 @@
                     <div class="ml-4">
                         <a href="/upload">Upload</a>
                     </div>
-                    <div class="ml-4 border-b-2 border-blue-600">
+                    <div class="ml-4">
                         <a href="/history">History</a>
                     </div>
-                    <div class="ml-4">
+                    <div class="ml-4 border-b-2 border-blue-600">
                         <a href="/advertise">Advertise</a>
                     </div>
                 </div>
             </div>
 
             <div class="m-4">
-	            <h1>Viewing history</h1>
-                <div class="m-4">
-                    <table>
-                        <tr>
-                            <th class="border-2 p-1 pl-2 pr-2">Video id</th>
-                            <th class="border-2 p-1 pl-2 pr-2">Date watched</th>
-                        </tr>
-                        {{#each videos}}
-                            <tr class="mt-1">
-                                <td class="border-2 p-1 pl-2 pr-2">
-                                    <a href="/video?id={{this.videoId}}">{{this.videoId}}</a> 
-                                </td>
-                                <td class="border-2 p-1 pl-2 pr-2">
-                                    {{this.watched}}
-                                </td>
-                            </tr>
-                        {{/each}}
-                    </table>
+                <h1>Our Partners</h1>
+                <div class="m-4 flex flex-row flex-wrap">
+                    {{#each ads}}
+                        <div class="m-2 p-4 border rounded shadow" style="width: 300px;">
+                            <a href="{{this.url}}" target="_blank" rel="noopener noreferrer">
+                                <img src="{{this.image}}" alt="{{this.name}}" style="width: 100%; height: auto;">
+                                <div class="mt-2 text-center">
+                                    <h3 class="text-lg font-semibold">{{this.name}}</h3>
+                                    <p class="text-sm text-gray-500">{{this.url}}</p>
+                                </div>
+                            </a>
+                        </div>
+                    {{/each}}
                 </div>
             </div>
         </div>

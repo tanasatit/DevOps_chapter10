@@ -70,6 +70,38 @@ async function main() {
     });
 
     //
+    // Web page to show advertisements.
+    //
+    app.get("/advertise", async (req, res) => {
+        try {
+            const response = await axios.get("http://advertise/api/ads");
+            res.render("advertise", { ads: response.data.ads });
+        }
+        catch (err) {
+            console.error("Failed to get ads:", err.message);
+            res.render("advertise", { ads: [] });
+        }
+    });
+
+    //
+    // Proxy images from the advertise microservice.
+    //
+    app.get("/api/advertise/images/:filename", async (req, res) => {
+        try {
+            const response = await axios({
+                method: "GET",
+                url: `http://advertise/images/${req.params.filename}`,
+                responseType: "stream",
+            });
+            response.data.pipe(res);
+        }
+        catch (err) {
+            console.error("Failed to get image:", err.message);
+            res.sendStatus(404);
+        }
+    });
+
+    //
     // HTTP GET route that streams video to the user's browser.
     //
     app.get("/api/video", async (req, res) => {
